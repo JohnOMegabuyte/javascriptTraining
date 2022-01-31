@@ -39,7 +39,7 @@ class Entity {
     }
     compareDiets(other) {
         let returnString;
-        if (other.diet == this.diet) {
+        if (other.diet.localeCompare(this.diet) == 0) {
             returnString = `both ${other.species} & ${this.name} are ${other.diet} `;
 
         }
@@ -112,7 +112,7 @@ const jsonData = {
         {
             "species": "Brachiosaurus",
             "weight": 70000,
-            "height": "372",
+            "height": 372,
             "diet": "herbavor",
             "where": "North America",
             "when": "Late Jurasic",
@@ -161,8 +161,8 @@ entities = [];
 submitted = false;
 
 function submit() {
-    document.getElementById(`form-body`).style.visibility = submitted ? "visible" : "collapse";
-    document.getElementById(`grid`).style.visibility = submitted ? "collapse" : "visible";
+    document.getElementById(`form-body`).style.display = submitted ? "block" : "none";
+    document.getElementById(`grid`).style.display = submitted ? "none" : "flex";
     entities = [];
     jsonData.Dinos.forEach(element => {
         entities.push(new Dinosoar(element));
@@ -195,7 +195,7 @@ function pushGridItems(human) {
 
 }
 function constructInnerHtml(toConstruct) {
-    let rand = Math.floor(Math.random() * 7);
+    let rand = toConstruct.species =="Pigeon"?0: Math.floor(Math.random() * 6);
     let propName = `species`;
     if (toConstruct instanceof Human)
         propName = `name`;
