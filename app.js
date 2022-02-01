@@ -159,6 +159,19 @@ const jsonData = {
 
 entities = [];
 submitted = false;
+function pushGridItems(human) {
+    const grid = document.getElementById(`grid`);
+    let inner = ``;
+    entities.forEach((creature, index) => {
+        if (index == 4) {
+            //push human
+            inner += constructInnerHtml(human);
+        }
+        inner += constructInnerHtml(creature);
+    });
+    grid.innerHTML = inner;
+
+}
 
 function submit() {
     document.getElementById(`form-body`).style.display = submitted ? "block" : "none";
@@ -181,19 +194,7 @@ function submit() {
         pushGridItems(human);
     }
 }
-function pushGridItems(human) {
-    const grid = document.getElementById(`grid`);
-    let inner = ``;
-    entities.forEach((creature, index) => {
-        if (index == 4) {
-            //push human
-            inner += constructInnerHtml(human);
-        }
-        inner += constructInnerHtml(creature);
-    });
-    grid.innerHTML = inner;
 
-}
 function constructInnerHtml(toConstruct) {
     let rand = toConstruct.species =="Pigeon"?0: Math.floor(Math.random() * 6);
     let propName = `species`;
